@@ -1,31 +1,30 @@
 package com.cbfacademy.apiassessment.model;
 
-public class Stock implements Investment {
+public class Bond implements Investment {
     private Long id;
     private String name;
     private int quantity;
     private double purchasePrice;
     private double currentPrice;
-
-// getters and setters
+    private double interestRate;
+    // getters and setters
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
-        this.id = id;
+        this.id =id;
     }
     public String getName() {
         return name;
     }
-    public void setName(String name) {
+    public void setName (String name) {
         this.name = name;
     }
     public int getQuantity() {
-        return quantity;
+       return quantity;
     }
     public void setQuantity(int quantity) {
-      this.quantity = quantity;
+        this.quantity = quantity;
     }
     public double getPurchasePrice() {
         return purchasePrice;
@@ -39,9 +38,15 @@ public class Stock implements Investment {
     public void setCurrentPrice(double currentPrice) {
         this.currentPrice = currentPrice;
     }
+    public double getInterestRate() {
+        return interestRate;
+    }
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
+    }
     @Override
     public double getReturns() {
-        //calculation for stock returns
-        return (currentPrice - purchasePrice) * quantity;
+        //calculation for bond returns factoring in the interest rate
+        return((currentPrice -purchasePrice) + (purchasePrice * (interestRate /100))) * quantity;
     }
-}
+    }
