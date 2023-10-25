@@ -2,6 +2,7 @@ package com.cbfacademy.apiassessment.service;
 
 import com.cbfacademy.apiassessment.model.Investment;
 import com.cbfacademy.apiassessment.repository.InvestmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,10 +12,13 @@ import java.util.Optional;
 @Service
 
 public class InvestmentService {
-
-    private InvestmentRepository investmentRepository;
+    //@Autowired
+    private final InvestmentRepository investmentRepository;
+    public InvestmentService(InvestmentRepository investmentRepository) {
+        this.investmentRepository = investmentRepository;
+    }
     public List<Investment> findAll() {
-        return InvestmentRepository.findAll();
+        return investmentRepository.findAll();
     }
     public Optional<Investment> findById(Long id) {
         return investmentRepository.findById(id);
