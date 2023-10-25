@@ -49,4 +49,4 @@ public class Bond implements Investment {
         //calculation for bond returns factoring in the interest rate
         return((currentPrice -purchasePrice) + (purchasePrice * (interestRate /100))) * quantity;
     }
-    }
+}
