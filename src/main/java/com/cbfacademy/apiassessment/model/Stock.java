@@ -1,13 +1,31 @@
 package com.cbfacademy.apiassessment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+//Implementation of the Investment interface for Stocks.
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Stock implements Investment {
+    // Class properties for a Stock
     private Long id;
     private String name;
     private int quantity;
     private double purchasePrice;
     private double currentPrice;
+// Constructor
+    public Stock(Long id, String name, int quantity, double purchasePrice, double currentPrice) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.purchasePrice = purchasePrice;
+        this.currentPrice = currentPrice;
+    }
 
-// getters and setters
+    public Stock() {
+
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -41,7 +59,7 @@ public class Stock implements Investment {
     }
     @Override
     public double getReturns() {
-        //calculation for stock returns
+        //Calculation for stock returns
         return (currentPrice - purchasePrice) * quantity;
     }
 }
