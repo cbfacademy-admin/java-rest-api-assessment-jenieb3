@@ -17,23 +17,28 @@ public class InvestmentController {
     public InvestmentController(InvestmentService investmentService) {
         this.investmentService = investmentService;
     }
+    // Fetch all investments.
     @GetMapping
     public List<Investment> getAllInvestments() {
         return investmentService.findAll();
     }
+    // Fetch investments by ID
     @GetMapping("/{id}")
     public ResponseEntity<Investment> getInvestmentById(@PathVariable Long id) {
         Optional<Investment> optionalInvestment = investmentService.findById(id);
         return optionalInvestment.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+    // Create a new investment.
     @PostMapping
     public Investment createInvestment(@RequestBody Investment investment) {
         return investmentService.save(investment);
     }
+    // Update an investment.
     @PutMapping("/{id}")
     public Investment updateInvestment(@PathVariable Long id, @RequestBody Investment updatedInvestment) {
        return investmentService.save(updatedInvestment);
     }
+    //Delete an investment.
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteInvestment(@PathVariable Long id) {
         investmentService.deleteById(id);

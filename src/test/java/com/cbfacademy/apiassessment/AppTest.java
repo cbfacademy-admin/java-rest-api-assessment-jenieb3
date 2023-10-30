@@ -10,15 +10,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Description;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+// Test class for the App's investment API endpoints.
+
 @SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class InvestmentControllerTest {
+class AppTest {
 
 	@LocalServerPort
 	private int port;
@@ -34,38 +37,54 @@ class InvestmentControllerTest {
 	}
 
 	@Test
-	@Description("/test to get all investments")
+	@Description("test to get all investments")
 	public void getAllInvestments_ShouldReturnInvestmentsList() {
 		ResponseEntity<Investment[]> response = restTemplate.getForEntity(base.toString(), Investment[].class);
-
 		assertEquals(200, response.getStatusCode().value());
-		assertTrue(response.getBody().length >=0);
+		assertTrue(Objects.requireNonNull(response.getBody()).length > 0);
 	}
-
 	@Test
-	@Description("/test to get a specific investment by ID")
+	@Description("test to get a specific investment by ID")
 	public void getInvestmentById_ShouldReturnInvestment() {
-		Long id = 1L;
+		ResponseEntity<List<Investment>> responseList = restTemplate.exchange(
+				base.toString(),
+				HttpMethod.GET,
+				null,
+				new ParameterizedTypeReference<List<Investment>>(){}
+		);
+		Long id = responseList.getBody().get(0).getId();
+
 		ResponseEntity<Investment> response = restTemplate.getForEntity(base.toString() + "/" + id, Investment.class);
 		assertEquals(200, response.getStatusCode().value());
-		assertEquals(id, response.getBody().getId());
+		assertEquals(id, Objects.requireNonNull(response.getBody()).getId());
 	}
 	@Test
 	@Description("test to create a new bond investment")
 	public void createBondInvestment_ShouldReturnCreatedInvestment() {
 		Bond bond = new Bond();
+		bond.setId(5L);
+		bond.setName("TestBond");
+		bond.setQuantity(100);
+		bond.setPurchasePrice(1000.0);
+		bond.setCurrentPrice(1050.0);
+
 		ResponseEntity<Investment> response = restTemplate.postForEntity(base.toString(), bond, Investment.class);
 		assertEquals(200, response.getStatusCode().value());
-		assertNotNull(response.getBody().getId());
+		assertNotNull(Objects.requireNonNull(response.getBody()).getId());
 	}
 	@Test
 	@Description("test to create new stock investment")
 	public void createStockInvestment_ShouldReturnCreatedInvestment() {
 		Stock stock = new Stock();
+		stock.setId(6L);
+		stock.setName("TestStock");
+		stock.setQuantity(50);
+		stock.setPurchasePrice(100.0);
+		stock.setCurrentPrice(110.0);
+
 		ResponseEntity<Investment> response = restTemplate.postForEntity(base.toString(), stock, Investment.class);
 		assertEquals(200, response.getStatusCode().value());
-		assertNotNull(response.getBody().getId());
-
+		assertNotNull(Objects.requireNonNull(response.getBody()).getId());
 	}
 	@Test
 	@Description("test to update new stock")

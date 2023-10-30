@@ -1,13 +1,33 @@
 package com.cbfacademy.apiassessment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+// Implementation of the Investment interface for Bonds.
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Bond implements Investment {
+    // Class properties for Bond.
     private Long id;
     private String name;
     private int quantity;
     private double purchasePrice;
     private double currentPrice;
-    private double interestRate;
-    // getters and setters
+
+// Constructor
+    public Bond(Long id , String name, int quantity, double purchasePrice, double currentPrice) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.purchasePrice = purchasePrice;
+        this.currentPrice = currentPrice;
+
+    }
+
+    public Bond() {
+
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -38,15 +58,10 @@ public class Bond implements Investment {
     public void setCurrentPrice(double currentPrice) {
         this.currentPrice = currentPrice;
     }
-    public double getInterestRate() {
-        return interestRate;
-    }
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
-    }
+
     @Override
     public double getReturns() {
-        //calculation for bond returns factoring in the interest rate
-        return((currentPrice -purchasePrice) + (purchasePrice * (interestRate /100))) * quantity;
+        //Calculate returns for a Bond.
+        return(currentPrice -purchasePrice) * quantity;
     }
 }
