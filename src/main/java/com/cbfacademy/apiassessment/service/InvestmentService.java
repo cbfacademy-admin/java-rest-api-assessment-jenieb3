@@ -55,3 +55,5 @@ public class InvestmentService {
         }
     }
 }
+//Parsing algorithm to read customer input
+//Converting between excel and JSON
