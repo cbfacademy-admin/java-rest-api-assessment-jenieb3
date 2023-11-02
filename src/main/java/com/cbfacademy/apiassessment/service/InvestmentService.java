@@ -1,12 +1,11 @@
 package com.cbfacademy.apiassessment.service;
 
 import com.cbfacademy.apiassessment.model.Investment;
-import com.cbfacademy.apiassessment.utility.JsonUtil;
+import com.cbfacademy.apiassessment.repository.InvestmentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,45 +14,61 @@ import java.util.Optional;
 
 public class InvestmentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvestmentService.class);
-
-    public InvestmentService() {
+    private final InvestmentRepository investmentRepository;
+    @Autowired
+    public InvestmentService(InvestmentRepository investmentRepository) {
+        this.investmentRepository = investmentRepository;
     }
-
+    // This method finds all investments
     public List<Investment> findAll() {
-        // Retrieve all investments from the JSON file
+        LOGGER.info("Attempting to fetch all investments");
         try {
-            return JsonUtil.readInvestmentsFromJson();
-        } catch (IOException e) {
-            LOGGER.error("Error reading investments from JSON", e);
-            // If there's an error reading the JSON, return an empty list.
-            return new ArrayList<>();
+            List<Investment> investments = investmentRepository.findAll();
+            LOGGER.info("Successfully fetched {} investments" ,investments.size());
+            return investments;
+        } catch (Exception e) {
+            LOGGER.error("Error occurred while fetching all investments", e);
+            throw new RuntimeException("Unable to fetch investments", e);
         }
     }
+    //This method finds investments based on their ID.
     public Optional<Investment> findById(Long id) {
-        // Retrieve all investments and find the specific one by its ID
-        return findAll().stream().filter(investment -> investment.getId().equals(id)).findFirst();
+        LOGGER.info("Attempting to find investment with ID: {}", id);
+        try {
+            Optional<Investment> investment = investmentRepository.findById(id);
+            if (investment.isPresent()) {
+                Investment inv = investment.get();
+                LOGGER.info("Investment found: {}", inv.getName());
+            } else {
+                LOGGER.warn("No investment found with ID: {}", id);
+            }
+            return investment;
+        } catch (Exception e) {
+            LOGGER.error("Error occurred while fetching investment with ID: {}.", id, e);
+            throw new RuntimeException("Unable to fetch investment.", e);
+        }
     }
     // This method saves a new investment.
     public Investment save(Investment investment) {
-        List<Investment> investments = findAll();
-        investments.add(investment);
+        LOGGER.info("Attempting to save Investment");
         try {
-            JsonUtil.writeInvestmentsToJson(investments);
-        } catch (IOException e) {
-            LOGGER.error("Error writing investments to JSON", e);
+            Investment savedInvestment = investmentRepository.save(investment);
+            LOGGER.info("Investment saved with ID: {}", savedInvestment.getId());
+            return savedInvestment;
+        } catch (Exception e) {
+            LOGGER.error("Error occurred while saving investment.", e);
+            throw new RuntimeException("Unable to save investment.", e);
         }
-        return investment;
     }
-    // This method deletes an investment by its ID.
+        // This method deletes an investment by its ID.
     public void deleteById(Long id) {
-        List<Investment> investments = findAll();
-        investments.removeIf(investment -> investment.getId().equals(id));
+        LOGGER.info("Attempting to delete investment with ID: {}", id);
         try {
-            JsonUtil.writeInvestmentsToJson(investments);
-        } catch (IOException e) {
-            LOGGER.error("Error deleting investment from JSON by ID: {}", id, e);
+            investmentRepository.deleteById(id);
+            LOGGER.info("Successfully  deleted investment ID: {}", id);
+        } catch (Exception e) {
+            LOGGER.error("Error occurred while deleting investment with ID: {}", id, e);
+            throw new RuntimeException("Unable to delete investment", e);
         }
     }
 }
-//Parsing algorithm to read customer input
-//Converting between excel and JSON
