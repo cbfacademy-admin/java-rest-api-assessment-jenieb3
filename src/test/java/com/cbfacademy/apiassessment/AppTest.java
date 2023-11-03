@@ -52,7 +52,7 @@ class AppTest {
 				null,
 				new ParameterizedTypeReference<List<Investment>>(){}
 		);
-		Long id = responseList.getBody().get(0).getId();
+		Long id = Objects.requireNonNull(responseList.getBody()).get(0).getId();
 
 		ResponseEntity<Investment> response = restTemplate.getForEntity(base.toString() + "/" + id, Investment.class);
 		assertEquals(200, response.getStatusCode().value());
@@ -63,7 +63,7 @@ class AppTest {
 	public void createBondInvestment_ShouldReturnCreatedInvestment() {
 		Bond bond = new Bond();
 		bond.setId(5L);
-		bond.setName("TestBond");
+		bond.setName("PostBond");
 		bond.setQuantity(100);
 		bond.setPurchasePrice(1000.0);
 		bond.setCurrentPrice(1050.0);
@@ -76,8 +76,8 @@ class AppTest {
 	@Description("test to create new stock investment")
 	public void createStockInvestment_ShouldReturnCreatedInvestment() {
 		Stock stock = new Stock();
-		stock.setId(6L);
-		stock.setName("TestStock");
+		stock.setId(1L);
+		stock.setName("GoogleStock");
 		stock.setQuantity(50);
 		stock.setPurchasePrice(100.0);
 		stock.setCurrentPrice(110.0);
@@ -92,38 +92,38 @@ class AppTest {
 		Long id = 1L;
 		Stock updatedStock = new Stock();
 		updatedStock.setId(id);
-		updatedStock.setName("UpdatedTestStock");
+		updatedStock.setName("GoogleStock");
 		updatedStock.setQuantity(60);
 		updatedStock.setPurchasePrice(110.0);
 		updatedStock.setCurrentPrice(115.0);
 
-		restTemplate.put(base.toString() + "/" + id, Stock.class);
+		restTemplate.put(base.toString() + "/" + id, updatedStock, Stock.class);
 		ResponseEntity<Stock> response = restTemplate.getForEntity(base.toString() + "/" + id, Stock.class);
 		assertEquals(200, response.getStatusCode().value());
-		assertEquals("UpdatedStockTest", Objects.requireNonNull(response.getBody()).getName());
+		assertEquals("GoogleStock", Objects.requireNonNull(response.getBody()).getName());
 		assertEquals(60, response.getBody().getQuantity());
 	}
 	@Test
 	@Description("test to update new bond")
 	public void updateBondInvestment_ShouldReturnUpdatedInvestment() {
-		Long id = 1L;
+		Long id = 11L;
 		Bond updatedBond = new Bond();
 		updatedBond.setId(id);
-		updatedBond.setName("UpdatedTestBond");
+		updatedBond.setName("OrchidBond");
 		updatedBond.setQuantity(120);
-		updatedBond.setPurchasePrice(1010.0);
-		updatedBond.setCurrentPrice(1060.0);
+		updatedBond.setPurchasePrice(1000.0);
+		updatedBond.setCurrentPrice(1050.0);
 
-		restTemplate.put(base.toString() + "/" + id, Bond.class);
-		ResponseEntity<Bond> response = restTemplate.getForEntity(base.toString() + id, Bond.class);
+		restTemplate.put(base.toString() + "/" + id, updatedBond, Bond.class);
+		ResponseEntity<Bond> response = restTemplate.getForEntity(base.toString() + "/" + id,  Bond.class);
 		assertEquals(200, response.getStatusCode().value());
-		assertEquals("UpdatedBondTest", Objects.requireNonNull(response.getBody()).getName());
+		assertEquals("OrchidBond", Objects.requireNonNull(response.getBody()).getName());
 		assertEquals(120, response.getBody().getQuantity());
 	}
 	@Test
 	@Description("test to delete investment by ID")
 	public void deleteInvestment_ShouldReturnDeletedInvestment() {
-		Long id = 1L;
+		Long id = 21L;
 		restTemplate.delete(base.toString() + "/" + id);
 		ResponseEntity<Investment> response = restTemplate.getForEntity(base.toString() + "/" + id, Investment.class);
 		assertEquals(404, response.getStatusCode().value());
