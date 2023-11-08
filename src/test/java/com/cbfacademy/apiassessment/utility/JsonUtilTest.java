@@ -79,7 +79,7 @@ public class JsonUtilTest {
         doNothing().when(objectMapper).writeValue(any(FileOutputStream.class), any(InvestmentWrapper.class));
 
         //Calling the method under test
-        jsonUtil.writeInvestmentsToJson(wrapper.getInvestments());
+        jsonUtil.writeInvestmentsToJson(wrapper.getInvestments(), false);// for PrettyPrinter
         //Asserting that the objectMapper's writeValue method was called
         verify(objectMapper).writeValue(any(FileOutputStream.class), any(InvestmentWrapper.class));
         //Cleaning up by deleting the temporary file
