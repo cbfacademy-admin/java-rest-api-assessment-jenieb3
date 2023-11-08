@@ -32,17 +32,21 @@ public class JsonUtil {
             return wrapper.getInvestments();
         }
     }
+
     // Method to write investments to the JSON file.
-    public void writeInvestmentsToJson(List<Investment>investments) throws IOException {
+    public void writeInvestmentsToJson(List<Investment> investments, boolean prettyPrint) throws IOException {
         Resource resource = resourceLoader.getResource(filePath);
         File file = resource.getFile();
         try (OutputStream fileOutputStream = new FileOutputStream(file)) {
             InvestmentWrapper wrapper = new InvestmentWrapper();
             wrapper.setInvestments(investments);
             // Configure ObjectMapper to use the default pretty printer
-            //objectMapper.writerWithDefaultPrettyPrinter().writeValue(fileOutputStream, wrapper);
-            objectMapper.writeValue(fileOutputStream, wrapper);
+            if (prettyPrint) {
+                objectMapper.writerWithDefaultPrettyPrinter().writeValue(fileOutputStream, wrapper);
+            } else {
+                objectMapper.writeValue(fileOutputStream, wrapper);
             }
         }
     }
+}
 

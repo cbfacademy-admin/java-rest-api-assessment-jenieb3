@@ -51,7 +51,7 @@ public class InvestmentRepository {
     public Investment save(Investment investment) {
         investments.put(investment.getId(),investment);
         try {
-            jsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()));
+            jsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()), false);
         } catch (IOException e) {
             logger.error("Error saving investment with ID: " + investment.getId(), e);
         }
@@ -61,7 +61,7 @@ public class InvestmentRepository {
     public void deleteById(Long id) {
         investments.remove(id);
         try {
-            jsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()));
+            jsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()), false);
         } catch (IOException e)  {
             logger.error("Error deleting investment with ID: " + id, e);
 
