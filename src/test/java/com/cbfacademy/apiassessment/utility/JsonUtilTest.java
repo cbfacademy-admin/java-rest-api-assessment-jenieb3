@@ -81,7 +81,7 @@ public class JsonUtilTest {
         //Calling the method under test
         jsonUtil.writeInvestmentsToJson(wrapper.getInvestments());
         //Asserting that the objectMapper's writeValue method was called
-        verify(objectMapper).writeValue(any(FileOutputStream.class), any(Investment.class));
+        verify(objectMapper).writeValue(any(FileOutputStream.class), any(InvestmentWrapper.class));
         //Cleaning up by deleting the temporary file
         assertTrue(tempFile.delete(), "Temporary file deletion failed");
     }
