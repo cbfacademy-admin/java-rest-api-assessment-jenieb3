@@ -40,7 +40,8 @@ public class JsonUtil {
             InvestmentWrapper wrapper = new InvestmentWrapper();
             wrapper.setInvestments(investments);
             // Configure ObjectMapper to use the default pretty printer
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(fileOutputStream, wrapper);
+            //objectMapper.writerWithDefaultPrettyPrinter().writeValue(fileOutputStream, wrapper);
+            objectMapper.writeValue(fileOutputStream, wrapper);
             }
         }
     }
