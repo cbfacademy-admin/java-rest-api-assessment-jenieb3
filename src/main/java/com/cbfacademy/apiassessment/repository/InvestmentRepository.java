@@ -20,12 +20,16 @@ public class InvestmentRepository {
     private static final Logger logger = LoggerFactory.getLogger(InvestmentRepository.class);
     //In-memory storage for investments.
     private final Map<Long, Investment> investments = new HashMap<>();
+    private final JsonUtil jsonUtil;
+    public InvestmentRepository(JsonUtil jsonUtil) {
+        this.jsonUtil = jsonUtil;
+    }
     //Initialise the investments map with data from a JSON file.
     @PostConstruct
     public void init() {
         try {
             // Read investments from a JSON file.
-            List<Investment>investmentList = JsonUtil.readInvestmentsFromJson();
+            List<Investment>investmentList = jsonUtil.readInvestmentsFromJson();
             // Populate the investments map.
             for (Investment investment : investmentList) {
                 investments.put(investment.getId(), investment);
@@ -47,7 +51,7 @@ public class InvestmentRepository {
     public Investment save(Investment investment) {
         investments.put(investment.getId(),investment);
         try {
-            JsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()));
+            jsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()));
         } catch (IOException e) {
             logger.error("Error saving investment with ID: " + investment.getId(), e);
         }
@@ -57,7 +61,7 @@ public class InvestmentRepository {
     public void deleteById(Long id) {
         investments.remove(id);
         try {
-            JsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()));
+            jsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()));
         } catch (IOException e)  {
             logger.error("Error deleting investment with ID: " + id, e);
 
