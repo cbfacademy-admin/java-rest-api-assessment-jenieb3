@@ -1,6 +1,7 @@
 package com.cbfacademy.apiassessment.model;
 
 import java.util.List;
+
 //Wrapper class for deserialization and serialization of JSON
 public class InvestmentWrapper {
     //List to hold the investments

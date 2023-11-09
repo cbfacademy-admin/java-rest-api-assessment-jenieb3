@@ -1,0 +1,51 @@
+[
+  {
+    "type": "Stock",
+    "id": 1,
+    "name": "TechCorp",
+    "quantity": 150,
+    "purchasePrice": 320.5,
+    "currentPrice": 350.0
+  },
+  {
+    "type": "Bond",
+    "id": 2,
+    "name": "GovBond2025",
+    "quantity": 200,
+    "purchasePrice": 1000.0,
+    "currentPrice": 1050.0
+  },
+  {
+    "type": "Stock",
+    "id": 3,
+    "name": "HealthPlus",
+    "quantity": 80,
+    "purchasePrice": 180.0,
+    "currentPrice": 190.5
+  },
+  {
+    "type": "Bond",
+    "id": 4,
+    "name": "InfraBond2030",
+    "quantity": 150,
+    "purchasePrice": 500.0,
+    "currentPrice": 550.0
+
+  },
+  {
+    "type": "Stock",
+    "id": 5,
+    "name": "AutoMobileX",
+    "quantity": 200,
+    "purchasePrice": 75.5,
+    "currentPrice": 80.0
+  },
+  {
+    "type": "Bond",
+    "id": 6,
+    "name": "CityDev2028",
+    "quantity": 300,
+    "purchasePrice": 1000.0,
+    "currentPrice": 1100.0
+  }
+]

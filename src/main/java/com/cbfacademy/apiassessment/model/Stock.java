@@ -24,12 +24,17 @@ public class Stock implements Investment {
     public Stock() {
 
     }
+    // Getter for Type
+    @Override
+    public String getType() {
+        return "Stock";
+    }
+
 
     // Getters and Setters
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
