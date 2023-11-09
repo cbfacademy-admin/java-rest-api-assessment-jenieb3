@@ -49,6 +49,9 @@ public class InvestmentRepository {
     }
     // Save or update an investment. After saving in memory, it also updates the JSON file.
     public Investment save(Investment investment) {
+        if (investment.getId() <=0) {
+            throw new IllegalArgumentException("Investment ID must be greater than 0");//Validation for IDs
+        }
         investments.put(investment.getId(),investment);
         try {
             jsonUtil.writeInvestmentsToJson(new ArrayList<>(investments.values()), false);
