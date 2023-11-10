@@ -4,10 +4,16 @@ import com.cbfacademy.apiassessment.model.Bond;
 import com.cbfacademy.apiassessment.model.Investment;
 import com.cbfacademy.apiassessment.model.Stock;
 import com.cbfacademy.apiassessment.service.InvestmentService;
+import com.cbfacademy.apiassessment.utility.ExportToExcel;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,5 +82,21 @@ public class InvestmentController {
             @RequestParam(required = false) String sortBy) {
         return investmentService.filterAndSortInvestments(type, minReturn, sortBy);
 
+    }
+    @GetMapping("/export")
+    public void exportInvestments(HttpServletResponse response) throws IOException {
+        List<Investment> investments = investmentService.findAll();
+        ExportToExcel exportToExcel = new ExportToExcel();
+        exportToExcel.export(investments, "Investments.xlsx");
+
+        //Set up the HTTP response for downloading file
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=Investments.xlsx");
+        InputStream inputStream = new FileInputStream("Investments.xlsx");
+
+        //Copy the stream to the response's output stream.
+        IOUtils.copy(inputStream, response.getOutputStream());
+        response.flushBuffer();
+        inputStream.close();
     }
 }
