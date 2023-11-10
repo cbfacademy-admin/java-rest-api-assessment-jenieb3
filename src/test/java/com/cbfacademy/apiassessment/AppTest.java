@@ -65,9 +65,9 @@ class AppTest {
 	@Description("test to create a new bond investment")
 	public void createBondInvestment_ShouldReturnCreatedInvestment() {
 		Bond bond = new Bond();
-		bond.setId(5L);
-		bond.setName("TealBond ");
-		bond.setQuantity(100);
+		bond.setId(23L);
+		bond.setName("CoupBond ");
+		bond.setQuantity(75);
 		bond.setPurchasePrice(1000.0);
 		bond.setCurrentPrice(1050.0);
 
@@ -80,9 +80,9 @@ class AppTest {
 	@Description("test to create new stock investment")
 	public void createStockInvestment_ShouldReturnCreatedInvestment() {
 		Stock stock = new Stock();
-		stock.setId(1L);
-		stock.setName("GoogleStock");
-		stock.setQuantity(50);
+		stock.setId(21L);
+		stock.setName("DIHStock");
+		stock.setQuantity(53);
 		stock.setPurchasePrice(100.0);
 		stock.setCurrentPrice(110.0);
 

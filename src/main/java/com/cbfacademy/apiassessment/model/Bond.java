@@ -26,12 +26,6 @@ public class Bond implements Investment {
     public Bond() {
 
     }
-    // Getter for type
-    @Override
-    public String getType() {
-        return "Bond";
-    }
-
     // Getters and Setters
 
     public Long getId() {

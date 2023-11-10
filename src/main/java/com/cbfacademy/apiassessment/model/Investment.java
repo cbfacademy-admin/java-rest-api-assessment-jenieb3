@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 // Investment interface to represent any kind of investment
 public interface Investment {
     // Abstract methods for basic Investment properties.
-    String getType();
+
     Long getId();
     void setId(Long id);
     String getName();
