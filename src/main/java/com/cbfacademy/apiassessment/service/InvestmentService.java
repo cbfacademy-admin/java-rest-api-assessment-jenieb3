@@ -141,10 +141,20 @@ public class InvestmentService {
     public List<Investment> filterAndSortInvestments(String type, Double minReturn, String sortBy) {
         List<Investment> investments = investmentRepository.findAll();
         return investments.stream()
-                .filter(investment -> type == null || investment.getType().equalsIgnoreCase(type))
-                .filter(investment -> minReturn == null || investment.getReturns()>= minReturn)
+                .filter(investment -> {
+                    if (type == null) {
+                        return true;
+                    } else if ("Stock".equalsIgnoreCase(type)) {
+                        return investment instanceof Stock;
+                    } else if ("Bond".equalsIgnoreCase(type)) {
+                        return investment instanceof Bond;
+                    }
+                    return false;
+                })
+                .filter(investment -> minReturn == null || investment.getReturns() >= minReturn)
                 .sorted(getComparator(sortBy))
                 .collect(Collectors.toList());
+
     }
     private Comparator<Investment> getComparator(String sortBy) {
         switch (sortBy != null ? sortBy.toLowerCase() : "") {
