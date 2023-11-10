@@ -12,7 +12,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Description;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import java.net.URL;
 import java.util.List;
@@ -99,7 +98,7 @@ class AppTest {
 		Stock updatedStock = new Stock();
 		updatedStock.setId(id);
 		updatedStock.setName("GoogleStock");
-		updatedStock.setQuantity(80);
+		updatedStock.setQuantity(90);
 		updatedStock.setPurchasePrice(110.0);
 		updatedStock.setCurrentPrice(115.0);
 
@@ -107,7 +106,7 @@ class AppTest {
 		ResponseEntity<Stock> response = restTemplate.getForEntity(base.toString() + "/" + id, Stock.class);
 		assertEquals(200, response.getStatusCode().value());
 		assertEquals("GoogleStock", Objects.requireNonNull(response.getBody()).getName());
-		assertEquals(80, response.getBody().getQuantity());
+		assertEquals(90, response.getBody().getQuantity());
 	}
 
 	@Test
