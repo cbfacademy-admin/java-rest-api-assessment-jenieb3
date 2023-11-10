@@ -4,10 +4,10 @@
       "type": "Stock",
       "id": 1,
       "name": "GoogleStock",
-      "quantity": 50,
-      "purchasePrice": 100.0,
-      "currentPrice": 110.0,
-      "returns": 500.0
+      "quantity": 90,
+      "purchasePrice": 110.0,
+      "currentPrice": 115.0,
+      "returns": 450.0
     },
     {
       "type": "Stock",
@@ -39,7 +39,7 @@
     {
       "type": "Bond",
       "id": 5,
-      "name": "PostBond",
+      "name": "TealBond",
       "quantity": 100,
       "purchasePrice": 1000.0,
       "currentPrice": 1050.0,
@@ -96,8 +96,8 @@
       "name": "OrchidBond",
       "quantity": 120,
       "purchasePrice": 1000.0,
-      "currentPrice": 1050.0,
-      "returns": 6000.0
+      "currentPrice": 995.0,
+      "returns": -600.0
     },
     {
       "type": "Stock",
