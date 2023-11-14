@@ -51,7 +51,7 @@ class AppTest {
 				base.toString(),
 				HttpMethod.GET,
 				null,
-				new ParameterizedTypeReference<List<Investment>>() {
+				new ParameterizedTypeReference<>() {
 				}
 		);
 		Long id = Objects.requireNonNull(responseList.getBody()).get(0).getId();
@@ -94,19 +94,19 @@ class AppTest {
 	@Test
 	@Description("test to update new stock")
 	public void updateStockInvestment_ShouldReturnUpdatedInvestment() {
-		Long id = 1L;
+		Long id = 11L;
 		Stock updatedStock = new Stock();
 		updatedStock.setId(id);
-		updatedStock.setName("GoogleStock");
-		updatedStock.setQuantity(90);
+		updatedStock.setName("OrchidStock");
+		updatedStock.setQuantity(120);
 		updatedStock.setPurchasePrice(110.0);
 		updatedStock.setCurrentPrice(115.0);
 
 		restTemplate.put(base.toString() + "/" + id, updatedStock, Stock.class);
 		ResponseEntity<Stock> response = restTemplate.getForEntity(base.toString() + "/" + id, Stock.class);
 		assertEquals(200, response.getStatusCode().value());
-		assertEquals("GoogleStock", Objects.requireNonNull(response.getBody()).getName());
-		assertEquals(90, response.getBody().getQuantity());
+		assertEquals("OrchidStock", Objects.requireNonNull(response.getBody()).getName());
+		assertEquals(120, response.getBody().getQuantity());
 	}
 
 	@Test

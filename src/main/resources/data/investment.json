@@ -80,13 +80,13 @@
     "currentPrice" : 205.0,
     "returns" : 350.0
   }, {
-    "type" : "Bond",
+    "type" : "Stock",
     "id" : 11,
-    "name" : "OrchidBond",
+    "name" : "OrchidStock",
     "quantity" : 120,
-    "purchasePrice" : 1000.0,
-    "currentPrice" : 995.0,
-    "returns" : -600.0
+    "purchasePrice" : 110.0,
+    "currentPrice" : 115.0,
+    "returns" : 600.0
   }, {
     "type" : "Stock",
     "id" : 12,
