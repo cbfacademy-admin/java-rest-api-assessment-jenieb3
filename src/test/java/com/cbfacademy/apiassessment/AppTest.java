@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Description;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
+
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // Test class for the App's investment API endpoints.
 
 @SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 class AppTest {
 
 	@LocalServerPort
