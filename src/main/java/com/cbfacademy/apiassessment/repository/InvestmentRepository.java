@@ -1,5 +1,6 @@
 package com.cbfacademy.apiassessment.repository;
 
+import com.cbfacademy.apiassessment.exceptions.InvestmentValidationException;
 import com.cbfacademy.apiassessment.model.Bond;
 import com.cbfacademy.apiassessment.model.Investment;
 
@@ -57,7 +58,7 @@ public class InvestmentRepository {
     // Save or update an investment. After saving in memory, it also updates the JSON file.
     public Investment save(Investment investment) {
         if (investment.getId() <= 0) {
-            throw new IllegalArgumentException("Investment ID must be greater than 0");//Validation for IDs
+            throw new InvestmentValidationException("Investment ID must be greater than 0");//Validation for IDs
         }
         investments.put(investment.getId(), investment);
         try {
@@ -67,6 +68,7 @@ public class InvestmentRepository {
         }
         return investment;
     }
+
 
     // Delete a specific investment by its ID. After deleting from memory, it also updates the JSON file
     public void deleteById(Long id) {
