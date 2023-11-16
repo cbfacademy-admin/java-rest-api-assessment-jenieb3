@@ -1,5 +1,6 @@
 package com.cbfacademy.apiassessment.repository;
 
+import com.cbfacademy.apiassessment.exceptions.InvestmentValidationException;
 import com.cbfacademy.apiassessment.model.Bond;
 import com.cbfacademy.apiassessment.model.Investment;
 import com.cbfacademy.apiassessment.model.Stock;
@@ -92,7 +93,7 @@ public class InvestmentRepositoryTest {
         invalidBond.setId(0L);
         invalidBond.setName("Invalid Bond");
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvestmentValidationException.class, () -> {
             investmentRepository.save(invalidBond);
         });
 
