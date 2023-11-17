@@ -12,6 +12,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * ExportToExcel provides functionality to export a list of investments to an Excel file.
+ * It formats and write the investments to a .xlsx file for download.
+ */
+
 public class ExportToExcel {
     public void export(List<Investment> investments, String fileName) throws IOException {
         Workbook workbook = new XSSFWorkbook();

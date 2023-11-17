@@ -3,6 +3,11 @@ package com.cbfacademy.apiassessment.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+/**
+ * Investment is an interface representing the properties and behaviours of an investment.
+ * It is implemented by the investment types Bond and Stock.
+ */
+
 // Using Jackson annotations to help in serialization/deserialization of subclasses.
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

@@ -16,6 +16,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.stream.Collectors;
 
+/**
+ * InvestmentRepository abstracts the data access mechanism for investment entities.
+ * It provides a set of CRUD operations and additional queries to interact with the database.
+ * @Repository Indicates that the class provides the mechanism for storage, retrieval,
+ * update, delete operations on objects.
+ */
+
 @Repository
 //Mock repository to simulate data storage for Investments.
 public class InvestmentRepository {
