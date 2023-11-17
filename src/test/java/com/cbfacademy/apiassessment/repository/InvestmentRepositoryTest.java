@@ -21,6 +21,13 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for the InvestmentRepository class.
+ * This class verifies the functionality of data access operations, including the ability to correctly
+ * perform CRUD operations on investment data.
+ * Special focus is given to the correct handling of edge cases and exceptions.
+ */
+
 @ExtendWith(MockitoExtension.class)
 public class InvestmentRepositoryTest {
     @Mock

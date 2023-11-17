@@ -15,6 +15,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * InvestmentService provides the business logic for investment operations.
+ * It interacts with InvestmentRepository for data access and performs validations
+ * and business rule enforcement.
+ * @Service Marks the class a service provider, used for business logic.
+ */
 
 // Business logic for CRUD operations
 @Service

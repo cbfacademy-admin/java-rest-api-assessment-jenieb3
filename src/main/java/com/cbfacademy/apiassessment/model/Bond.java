@@ -2,6 +2,10 @@ package com.cbfacademy.apiassessment.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Bond is a concrete implementation of the Investment interface, representing a bond.
+ */
+
 // Implementation of the Investment interface for Bonds.
 @JsonIgnoreProperties(ignoreUnknown = true)
 

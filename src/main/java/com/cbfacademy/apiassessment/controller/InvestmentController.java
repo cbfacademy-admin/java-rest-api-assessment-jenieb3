@@ -17,6 +17,13 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The InvestmentController class handles incoming HTTP requests related to the investments.
+ * It delegates business logic to the InvestmentService and sends responses back to the client.
+ * @RestController Indicates that this class is a RESTful controller.
+ * @RequestMapping Maps HTTP requests to handler methods of the Model-View-Controller(MVC) and REST Controllers.
+ */
+
 @RestController
 @RequestMapping("/api/investment")
 public class InvestmentController {

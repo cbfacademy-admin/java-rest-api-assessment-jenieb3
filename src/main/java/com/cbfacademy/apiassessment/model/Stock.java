@@ -2,6 +2,10 @@ package com.cbfacademy.apiassessment.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Stock is a concrete implementation of the Investment interface, representing a stock.
+ */
+
 //Implementation of the Investment interface for Stocks.
 @JsonIgnoreProperties(ignoreUnknown = true)
 

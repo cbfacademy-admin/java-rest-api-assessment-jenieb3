@@ -27,6 +27,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+/**
+ * Test for the JsonUtility class.
+ * These tests ensure that JSON read and write operations are correctly handled, including the
+ * accurate serialization and deserialization of investment data to and from jSON format.
+ * The class uses mock objects to simulate file operations and interactions.
+ */
 @ExtendWith(MockitoExtension.class)
 public class JsonUtilTest {
     @Mock

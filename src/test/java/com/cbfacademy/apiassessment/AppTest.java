@@ -20,11 +20,20 @@ import java.util.List;
 import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.*;
 
-// Test class for the App's investment API endpoints.
+/**
+ * Integration tests for Investment API endpoints.
+ * This class tests the application's RESTful service layer, ensuring that each endpoint behaves
+ * as expected under various scenarios.
+ * It uses {@link TestRestTemplate} for making HTTP requests and assert responses.
+ * (@SpringbootTest) Boots the application for integration testing.
+ * (@ActiveProfiles) Specifies the 'test' profile for the test environment.
+ */
+
 
 @SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 class AppTest {
+	// Class fields and setup methods
 
 	@LocalServerPort
 	private int port;
@@ -39,6 +48,10 @@ class AppTest {
 		this.base = new URL("http://localhost:" + port + "/api/investment");
 	}
 
+	/**
+	 * Test the retrieval of all investments. Ensures the GET request to '/api/investment' returns a list
+	 * of investments and that the response status is OK(200)
+	 */
 	@Test
 	@Description("test to get all investments")
 	public void getAllInvestments_ShouldReturnInvestmentsList() {
@@ -46,7 +59,10 @@ class AppTest {
 		assertEquals(200, response.getStatusCode().value());
 		assertTrue(Objects.requireNonNull(response.getBody()).length > 0);
 	}
-
+	/**
+	 * Test the retrieval of specific investment by its ID. Ensures the GET request to '/api/investment/{id}'
+	 * returns the correct investment and that the response status is OK(200)
+	 */
 	@Test
 	@Description("test to get a specific investment by ID")
 	public void getInvestmentById_ShouldReturnInvestment() {
@@ -63,7 +79,10 @@ class AppTest {
 		assertEquals(200, response.getStatusCode().value());
 		assertEquals(id, Objects.requireNonNull(response.getBody()).getId());
 	}
-
+	/**
+	 * Test the creation of a new bond investment. Ensures the POST request to '/api/investment' correctly
+	 * creates a bond and that the response status is OK(200)
+	 */
 	@Test
 	@Description("test to create a new bond investment")
 	public void createBondInvestment_ShouldReturnCreatedInvestment() {
@@ -78,7 +97,10 @@ class AppTest {
 		assertEquals(200, response.getStatusCode().value());
 		assertNotNull(Objects.requireNonNull(response.getBody()).getId());
 	}
-
+	/**
+	 * Test the creation of a new stock investment. Ensures the POST request to '/api/investment' correctly
+	 * creates a stock and that the response status is OK(200)
+	 */
 	@Test
 	@Description("test to create new stock investment")
 	public void createStockInvestment_ShouldReturnCreatedInvestment() {
@@ -93,7 +115,10 @@ class AppTest {
 		assertEquals(200, response.getStatusCode().value());
 		assertNotNull(Objects.requireNonNull(response.getBody()).getId());
 	}
-
+	/**
+	 * Test to updating an existing stock investment. Ensures the PUT request to '/api/investment/{id}' correctly
+	 * updates a stock details and the updated information is reflected in the response.
+	 */
 	@Test
 	@Description("test to update new stock")
 	public void updateStockInvestment_ShouldReturnUpdatedInvestment() {
@@ -111,7 +136,10 @@ class AppTest {
 		assertEquals("OrchidStock", Objects.requireNonNull(response.getBody()).getName());
 		assertEquals(120, response.getBody().getQuantity());
 	}
-
+	/**
+	 * Test to updating an existing bond investment. Ensures the PUT request to '/api/investment/{id}' correctly
+	 * updates a bond details and the updated information is reflected in the response.
+	 */
 	@Test
 	@Description("test to update new bond")
 	public void updateBondInvestment_ShouldReturnUpdatedInvestment() {
@@ -129,7 +157,11 @@ class AppTest {
 		assertEquals("OrchidBond", Objects.requireNonNull(response.getBody()).getName());
 		assertEquals(120, response.getBody().getQuantity());
 	}
-
+	/**
+	 * Tests the deletion of an investment by its ID. Ensures the DELETE request to '/api/investment/{id}'
+	 * removes the investment and the subsequent GET response for the same ID return a NOT FOUND(404)
+	 * status.
+	 */
 	@Test
 	@Description("test to delete investment by ID")
 	public void deleteInvestment_ShouldReturnDeletedInvestment() {

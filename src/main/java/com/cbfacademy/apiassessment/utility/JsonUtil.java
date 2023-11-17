@@ -11,6 +11,11 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.util.List;
 
+/**
+ * JsonUtil handles JSON-related operations, including reading from and writing to JSON files.
+ * It leverages Jackson objectMapper for processing JSON data.
+ */
+
 @Component
 //Utility class to handle JSON operations related to investment objects,
 public class JsonUtil {
