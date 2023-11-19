@@ -1,205 +1,220 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/iDPpP-d0)
-# **Java API Assessment**
+# Financial Portfolio Management API
 
-## **Introduction**
-Dive into the world of API development using Java and SpringBoot. We're handing over a skeleton codebase; your challenge is to shape a top-notch API from it.
+![MIT License](https://img.shields.io/badge/license-MIT-brown)
 
-You can build any API of your choosing, but it must include the following:
+## Description
 
-1. At least one algorithm
-1. Unit test at least one class
-1. Store the data in a JSON file 
-1. Exception handling 
-1. Evidence of inheritance
-1. Good use of HTTP Protocols - methods, request and response, have full CRUD operations supported 
-1. Documentation
+The Investment API is a sophisticated Spring Boot-based application tailored for managing and tracking various types
+of investments, including stocks and bonds. Designed with the modern investor in mind, it provides a user-friendly
+platform to oversee investment portfolios, offering real-time insights and detailed analyses of financial assets. The
+API encapsulates a range of functionalities from basic CRUD operations to complex financial calculations, ensuring
+versatility and robustness in investment management.
 
-### **Learning Outcomes:**
+## Architecture
 
-By the end of this assessment, you should be able to:
+Below is the investment application's architecture diagram, inspired by the Model-View-Controller (MVC) design pattern,
+chosen for its well-organized structure that enhances maintenance and scalability.
+<br>
+<br>
 
-1. **Design and Architect APIs**: Get to grips with the nitty-gritty of curating a top-quality API, focusing on data flow and endpoint interactions.
-1. **Implement Best Practices**: Showcase your adherence to Java & SpringBoot coding standards, error handling, and optimal project structure.
-1. **Code Integration**: Seamlessly combine your creations with the provided skeleton codebase.
-1. **Exception Management**: Efficiently handle exceptions, ensuring your API remains sturdy and dependable.
+![Architecture Diagram](/images/design-pattern-mvc.PNG)
 
-Onward with this assessment, you're set for a deep dive into API development with Java and SpringBoot.
+<br>
+<br>
+In this design, each component—Controller, Service, Repository, Model, and Utility—has a clear role, enabling
+independent development and testing. This modularity is essential for the financial technology sector, ensuring the
+application's efficiency and reliability.
 
-## **Design & Requirements**
+## Table of Contents
 
-### **Design Considerations:**
-- **API Flow**: Map out your API's progression, from endpoints to their functionalities.
+1. [Key Features](#key-features)
+2. [Technology Stack](#technology-stack)
+3. [Documentation and Ease of Use](#documentation-and-ease-of-use)
+4. [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Step-by-Step Installation](#step-by-step-installation)
+5. [Running the Application](#running-the-application)
+6. [License](#license)
+7. [Contributing](#contributing)
+8. [Tests](#tests)
+9. [Questions](#questions)
+10. [Video](#video)
 
-### **Requirements List:**
-- **Core**: Make use of Java and SpringBoot.
-- **End Points**: Ensure they are detailed and fully operational.
-- **Error Handling**: Your API should handle mishaps gracefully and return informative feedback.
+## Key Features:
 
-### **Learning Outcomes:**
-- Acknowledge the pivotal role of a focused design in APIs.
-- See firsthand how a detailed requirements list can pave the way for successful development.
+* **Comprehensive Investment Management**: Users can create, read, update and delete investment dat, allowing full
+  control over their investment portfolios.
+* **Support for Multiple Investment Types**: Catering to a diverse range of financial assets, the API handles various
+  investment types like bonds and stocks, providing tailored functionalities for each.
+* **Real-time Portfolio Tracking**: The API offers up-to-date information on investments, giving users a current view of
+  their financial standings.
+* **Robust Error Handling**: Enhanced with custom exceptions like `InvestmentValidationException`, the API ensures data
+  integrity and smooth operation under various scenarios.
+* **Advanced Reporting**: Users can export investment data to Excel for offline Analysis, and the API supports JSON
+  operations for efficient data interchange.
 
-## **Repository Management**
+## Technology Stack
 
-- **Consistent Commits**: Commit often, capturing your progress and thought process.
-- **README**: Not just an afterthought. Fill it with the essence of your API, setup instructions, and other salient details.
+* **Java and Spring Boot**: The API leverages Java's reliability and Spring Boot's efficiency for rapid development and
+  deployment.
+* **In-Memory Data Management**: Utilises a `HashMap` for simulating database operations and storing data in memory,
+  suitable for demonstration and testing purposes.
+* **JSON File Handling**: Employs custom utility (`JsonUtil`) for reading and writing to JSON files, managing the
+  persistence of investment data.
+* **SpringDoc and Swagger**: Used for generating comprehensive and interactive API documentation.
+* **JUnit and Mockito**: Incorporated for thorough testing, ensuring the API's reliability and robustness.
+* **Git**: Utilised for version control, facilitating tracking of changes, manages code versions, and supporting
+  collaborative development.
 
-### **Learning Outcomes:**
-- Hone your skills in effective version control.
-- Recognise the value of a well-curated repository.
+## Documentation and Ease of Use
 
-## **Code Quality & Structure**
+The API documentation, generated using SpringDoc and Swagger, is accessible and user-friendly, providing clear insights
+into the available endpoints and their usage. This feature is particularly beneficial for developers looking to
+integrate or extend the API functionalities. The documentation is available
+at [Swagger UI](http://localhost:8111/swagger-ui/index.html#/investment-controller).
 
-- **Best Practices**: Stick to Java and SpringBoot best practices and conventions.
-- **Modularity**: Your code should be modular, reusable, and easily comprehensible.
+1. **Ensure the Application is Running**: Before accessing the Swagger UI, make sure the Financial Portfolio
+   ManagementAPI is running on you local machine.
+2. **Access Swagger**: Note that the application must be running on port 8111 for this link to work. If you would like
+   to use a different port. adjust the URL accordingly in the `application.properties` file located in
+   the `src/main/resources` directory of the project.
+3. **Change the Server Port**:  Look for a line that says `server.port=8111`. change the number `8111` to your desired
+   port number.
+4. **Save the File**: Save your changes to the `application.properties` file.
+5. **Restart the Application**: After making changes to the port, restart the application for the changes to take
+   effect.
+6. **Access Swagger UI on New Port**: Once the application is running on the new port, adjust the Swagger UI URL
+   accordingly. For example, if you've changed the port to `8080`, the Swagger UI can be accessed
+   at http://localhost:8080/swagger-ui/index.html#/investment-controller.
 
-#### **Learning Outcomes:**
-- Craft clean, efficient, and maintainable code.
-- Harness Java and SpringBoot to the fullest.
+## Target Audience
 
----
+The Investment API is ideal for fintech applications, financial analysts, portfolio managers, and individual investors
+who require a reliable and efficient tool for investment management and analysis.
 
-## Getting Started
+## Installation
 
-- [Prerequisites](#prerequisites)
+Before you begin, ensure you have the following installed on your system:
 
-- [Setup](#setup)
+* ### Prerequisites
 
-### Prerequisites
+* This application uses the [Java](https://www.java.com/en/) programming language.
+  Ensure you have Java 17 LTS (or higher) installed locally. The following commands should confirm your instillation.
+* Maven 3.6 or newer
+* Git (for cloning the repository)
 
-Before you begin, make sure you have the following installed:
+  ```bash
+  $ javac -version
 
-1. [JDK 17](https://learn.microsoft.com/en-gb/java/openjdk/download#openjdk-17) (or higher)
+  javac 17.0.4
+  ```
 
-2. [Git](https://git-scm.com/downloads)
+  ```bash
+  $ java -version
 
-3. [Visual Studio Code](https://code.visualstudio.com/Download)
-   1. [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
-   2. [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack)
+  openjdk version "17.0.4" 2022-07-19 LTS
+  OpenJDK Runtime Environment Zulu17.36+13-CA (build 17.0.4+8-LTS)
+  OpenJDK 64-Bit Server VM Zulu17.36+13-CA (build 17.0.4+8-LTS, mixed mode, sharing)
+  ```
 
-Also make sure you have accounts for the following:
+* ### Step-by-Step Installation
+* **Clone the repository**:
 
-1. [GitHub](https://github.com/signup)
+ ```bash
+ git clone git@github.com:cbfacademy/java-rest-api-assessment-jenieb3.git
+  ```
 
-### Setup
+* **Navigate to the Project Directory**:
 
-#### 1. Clone the Repository
-
-```sh
-git clone [REPO_URL]
-cd [REPO_NAME]
+```bash
+cd java-rest-api-assessment
 ```
 
-Replace [REPO_URL] with the link to your GitHub repository and [REPO_NAME] with the repository's name.
+* **Build the Project**:
 
-#### 2. Install Dependencies
+ ```bash
+ mvn clean install
+ ```
 
-Open a terminal at the root of the repo directory and run the following command to install the dependencies:
+## Running the Application:
 
-```sh
-./mvnw clean dependency:resolve
-```
+After installing, you can run the application using the following Maven command.
 
-If you are on a Windows machine, that will be:
-```cmd
-mvnw clean dependency:resolve
-```
+  ```bash
+  mvn spring-boot:run
+  ```
 
-You should see console output similar to the following:
+This will start the Spring Boot application. Once the application is running you can access the API endpoints as defined
+in your swagger documentation.
 
-```sh
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] -------------------< com.cbfacademy:api-assessment >--------------------
-[INFO] Building api-assessment 0.0.1-SNAPSHOT
-[INFO]   from pom.xml
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- clean:3.2.0:clean (default-clean) @ api-assessment ---
-[INFO] Deleting /Users/user/Dev/cbfacademy/java-api-assessment/target
-...
-[truncated output]
-...
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.060 s
-[INFO] Finished at: 2023-10-03T16:18:25+01:00
-[INFO] ------------------------------------------------------------------------
-```
+## License
 
-#### 3. Running the Application
+This project is licensed under the MIT license.
 
-To start the API in VS Code, press `F5` or tap the 'Play' icon for the `api-assessment` app in the Spring Boot Dashboard.
+## Contributing
 
-Alternatively, to start the API from the terminal, run the following command:
+Contributions are welcome. To contribute:
 
-```sh
-./mvnw spring-boot:run
-```
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Submit a pull request.
 
-Or on Windows:
+* For major changes, please open an issue first to discuss the intended change.
 
-```cmd
-mvnw spring-boot:run
-```
+## Tests
 
-You should see console output similar to the following (press `Ctrl + C` to exit):
+Ensure you are in the main project directory, then run the test script:
 
-```sh
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] -------------------< com.cbfacademy:api-assessment >--------------------
-[INFO] Building api-assessment 0.0.1-SNAPSHOT
-[INFO]   from pom.xml
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- clean:3.2.0:clean (default-clean) @ api-assessment ---
-[INFO] Deleting /Users/gary/Dev/cbfacademy/java-api-assessment/target
-[INFO] 
-[INFO] >>> spring-boot:3.1.4:run (default-cli) > test-compile @ api-assessment >>>
-[INFO] 
-[INFO] --- resources:3.3.1:resources (default-resources) @ api-assessment ---
-[INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] Copying 0 resource from src/main/resources to target/classes
-...
-[truncated output]
-...
-2023-10-03T17:17:34.413+01:00  INFO 35536 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-10-03T17:17:34.751+01:00  INFO 35536 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2023-10-03T17:17:34.756+01:00  INFO 35536 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-10-03T17:17:34.756+01:00  INFO 35536 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
-2023-10-03T17:17:34.777+01:00  INFO 35536 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-10-03T17:17:34.778+01:00  INFO 35536 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 364 ms
-2023-10-03T17:17:34.898+01:00  INFO 35536 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-10-03T17:17:34.907+01:00  INFO 35536 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2023-10-03T17:17:34.911+01:00  INFO 35536 --- [  restartedMain] com.cbfacademy.apiassessment.App         : Started App in 0.643 seconds (process running for 0.786)
-```
+  ```bash
+  mvn test
+  ```
 
-Open your browser and navigate to `http://localhost:8080`.
+## Credits
 
-## **Deliverables**
+Alongside the course resources my Tutors, Teaching assistants and Mentors, I found the following websites useful:
 
-Ensure that your work is merged to the `main` branch of your GitHub repository by the specified deadline (original or extended). Your solution will assessed based on its state *at that point*; any later commits will **not** be taken into account.
+1. https://www.baeldung.com/spring-boot
+2. https://www.baeldung.com/jackson
+3. https://www.baeldung.com/mockito-series
+4. https://www.baeldung.com/junit-5
+5. https://www.baeldung.com/resttemplate-page-entity-response
+6. https://www.baeldung.com/spring-rest-openapi-documentation
+7. https://medium.com/@dsforgood/json-to-excel-conversion-using-jackson-and-apache-poi-40c2a9c10a0c
+8. https://stackoverflow.com/questions/45421453/java-8-stream-filter-sort-based-pdate
+9. https://stackoverflow.com/questions/14515994/convert-json-string-to-pretty-print-json-output-using-jackson
+10. https://www.baeldung.com/java-stream-filter-lambda
 
-## FAQs
+## Questions
 
-- Q: How can I process JSON in Java?
-    
-    A: There are a number of open-source packages that you can use to manipulate JSON. We recommend [Gson](https://github.com/google/gson), but you can also investigate alternatives like [json-simple](https://github.com/cliftonlabs/json-simple) or [Jackson](https://github.com/FasterXML/jackson-databind/).
+For questions or support, please contact jenelle.garbrah3@gmail.com. To see other projects,
+visit https://github.com/jenieb3/.
 
-- Q: Can I use another IDE I'm more familiar with instead of VS Code, like IntelliJ or Eclipse?
+## Screenshots
 
-    A: You can if you wish, but only VS Code is formally supported by CBF Academy staff, so you do so at your own risk.
+**Terminal at the start of the application**. 
+<br>
+<br>
+![Terminal at the start of Application](/images/start-application.PNG)
 
-## Top Tips
+<br>
+<br>
 
-- :camera_flash: Commit frequently and use meaningful commit messages. A granular, well-labelled history becomes an increasingly valuable asset over time.
-- :cactus: Use feature branches. Build the habit of isolating your changes for specific tasks and merging them into your default branch when complete.
-- :vertical_traffic_light: Use consistent naming conventions. Choose easily understandable names and naming patterns for your classes, functions and variables.
-- :triangular_ruler: Keep your code tidy. Using the built-in formatting of VS Code or other IDEs makes your code easier to read and mistakes easier to spot.
-- :books: Read the docs. Whether via Intellisense in your IDE, or browsing online documentation, build a clear understanding of the libraries your code leverages.
-- :calendar: Don't wait until the last minute. Plan your work early and make the most of the time available to complete the assessment and avoid pre-deadline palpitations.
-- :sos: Ask. :clap: For. :clap: Help! :clap: Your mentors, instructors and assistants are literally here to support you, so *make use of them* - don't sit and struggle in silence.
 
-Best of luck! Remember, it's not just about the destination; it's the journey. Happy coding! 🚀
+**Swagger documentation of the different endpoints found in this application**.
+<br>
+<br>
+![Swagger Documentation of Endpoints](/images/documentation-api.PNG)
+
+## Video
+
+**Video showing how to run the application and navigate to swagger documentation. From here you can try out the
+endpoints and download the data as an Excel file**.
+
+* **Click the link below**.
+* **Select the download button**.
+
+[Financial Portfolio Management API](https://drive.google.com/file/d/1EDZnuDv5PPPNFs3YDl6Ic2NOLE02d6WA/view?usp=sharing) 
+
+
+
