@@ -1,5 +1,6 @@
 package com.cbfacademy.apiassessment.service;
 
+import com.cbfacademy.apiassessment.exceptions.InvestmentValidationException;
 import com.cbfacademy.apiassessment.model.Bond;
 import com.cbfacademy.apiassessment.model.Investment;
 import com.cbfacademy.apiassessment.model.Stock;
@@ -88,18 +89,18 @@ public class InvestmentService {
     }
 
     private void validateInvestment(Investment investment) {
-        // Validation logic here
+        // Validation logic here - added corrections
         if (investment.getId() == null || investment.getId() <= 0) {
-            throw new IllegalArgumentException("Investment ID must be positive and non-null.");
+            throw new InvestmentValidationException("Investment ID must be positive and non-null.");
         }
         if (investment.getName() == null || investment.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Investment name must not be empty.");
+            throw new InvestmentValidationException("Investment name must not be empty.");
         }
         if (investment.getQuantity() < 0) {
-            throw new IllegalArgumentException("Quantity must be non-negative.");
+            throw new InvestmentValidationException("Quantity must be non-negative.");
         }
         if (investment.getPurchasePrice() < 0 || investment.getCurrentPrice() < 0) {
-            throw new IllegalArgumentException("Purchase price and current price must be non-negative.");
+            throw new InvestmentValidationException("Purchase price and current price must be non-negative.");
         }
 
     }
@@ -144,9 +145,10 @@ public class InvestmentService {
         return investmentRepository.findInvestmentWithHighestReturn();
    }
    // Algorithm to Filter and Sort Investments
+    //method signature and constructors
     public List<Investment> filterAndSortInvestments(String type, Double minReturn, String sortBy) {
-        List<Investment> investments = investmentRepository.findAll();
-        return investments.stream()
+        List<Investment> investments = investmentRepository.findAll();//fetching
+        return investments.stream()//converts list into stream
                 .filter(investment -> {
                     if (type == null) {
                         return true;
@@ -157,7 +159,7 @@ public class InvestmentService {
                     }
                     return false;
                 })
-                .filter(investment -> minReturn == null || investment.getReturns() >= minReturn)
+                .filter(investment -> minReturn == null || investment.getReturns() >= minReturn)//2nd filter
                 .sorted(getComparator(sortBy))
                 .collect(Collectors.toList());
 
