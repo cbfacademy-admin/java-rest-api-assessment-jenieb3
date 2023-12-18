@@ -87,10 +87,10 @@ class AppTest {
 	@Description("test to create a new bond investment")
 	public void createBondInvestment_ShouldReturnCreatedInvestment() {
 		Bond bond = new Bond();
-		bond.setId(23L);
-		bond.setName("CoupBond ");
-		bond.setQuantity(75);
-		bond.setPurchasePrice(1000.0);
+		bond.setId(-28L);
+		bond.setName("JupBond ");
+		bond.setQuantity(-65);
+		bond.setPurchasePrice(600.0);
 		bond.setCurrentPrice(1050.0);
 
 		ResponseEntity<Investment> response = restTemplate.postForEntity(base.toString(), bond, Investment.class);

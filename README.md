@@ -42,7 +42,7 @@ application's efficiency and reliability.
 
 ## Key Features:
 
-* **Comprehensive Investment Management**: Users can create, read, update and delete investment dat, allowing full
+* **Comprehensive Investment Management**: Users can create, read, update and delete investment data, allowing full
   control over their investment portfolios.
 * **Support for Multiple Investment Types**: Catering to a diverse range of financial assets, the API handles various
   investment types like bonds and stocks, providing tailored functionalities for each.
