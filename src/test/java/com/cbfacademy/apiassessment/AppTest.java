@@ -87,9 +87,9 @@ class AppTest {
 	@Description("test to create a new bond investment")
 	public void createBondInvestment_ShouldReturnCreatedInvestment() {
 		Bond bond = new Bond();
-		bond.setId(-28L);
+		bond.setId(28L);
 		bond.setName("JupBond ");
-		bond.setQuantity(-65);
+		bond.setQuantity(65);
 		bond.setPurchasePrice(600.0);
 		bond.setCurrentPrice(1050.0);
 
